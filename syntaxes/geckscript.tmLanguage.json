@@ -1,0 +1,205 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "geckscript",
+    "scopeName": "source.geckscript",
+	"fileTypes": [
+		".gek"
+	],
+	"patterns": [
+		{
+			"include": "function-parameters"
+		},
+		{
+			"include": "function"
+		},
+		{
+			"include": "#keyword.control"
+		},
+		{
+			"include": "#string.quoted.double"
+		},
+		{
+			"include": "#storage.type.name"
+		},
+		{
+			"include": "#operators"
+		},
+		{
+			"include": "#parens"
+		},
+		{
+			"include": "#parens-block"
+		},
+		{
+			"include": "#constants"
+		},
+		{
+			"include": "#comments"
+		}
+    ],
+	"repository": {
+		"keyword.control": {
+			"match": "(?i)\\b(scn|if|else|elseif|endif|while|loop|goto|label|begin|end|call|eval|return)\\b",
+			"name": "keyword.control.geckscript"
+		},
+		"string.quoted.double":	{
+			"name": "string.quoted.double.geckscript",
+			"begin": "\"",
+		    "end": "\"",
+		    "patterns": [ 
+		        {  
+					"name" : "constant.character.escape.geckscript",
+		            "match" : "%."
+		        }
+			]
+		},
+		"storage.type.name":{
+			"name": "storage.type.name.geckscript",
+			"match": "(?i)\\b(short|ref|int|float|array_var|string_var|Function)\\b"
+		},
+		"operators": {
+			"patterns": [
+				{
+					"match": "--",
+					"name": "keyword.operator.decrement.geckscript"
+				},
+				{
+					"match": "\\+\\+",
+					"name": "keyword.operator.increment.geckscript"
+				},
+				{
+					"match": "(%=|\\+=|-=|\\*=|\\/=|:=)",
+					"name": "keyword.operator.assignment.compound.geckscript"
+				},
+				{
+					"match": "\\b(\\+|-|/|%|\\*)\\b",
+					"name": "keyword.operator.arithmetic.geckscript"
+				},
+				{
+					"match": "!=|<=|>=|==|<|>",
+					"name": "keyword.operator.comparison.geckscript"
+				},
+				{
+					"match": "&&|!|\\|\\|",
+					"name": "keyword.operator.logical.geckscript"
+				},
+				{
+					"match": "\\b(set|let|to|:=|=)\\b",
+					"name": "keyword.operator.assignment.geckscript"
+				}
+			]
+		},
+		"constants":{
+			"patterns": [
+				{
+					"name": "constant.numeric.geckscript",
+					"match": "\\b\\-?\\d+([\\.\\,]\\d+)?\\b"
+				}
+			]
+		},
+		"parens": {
+			"patterns": [
+				{
+					"name": "meta.parens.geckscript",
+					"begin": "\\(",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.section.parens.begin.bracket.round.geckscript"
+						}
+					},
+					"end": "\\)",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.section.parens.end.bracket.round.geckscript"
+						}
+					},
+					"patterns": [
+						{
+							"include": "$self"
+						}
+					]
+				},
+				{
+					"name": "meta.array.literal.geckscript",
+					"begin": "\\[",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.section.parens.begin.bracket.square.geckscript"
+						}
+					},
+					"end": "\\]",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.section.parens.end.bracket.geckscript"
+						}
+					},
+					"patterns": [
+						{
+							"include": "$self"
+						}
+					]
+				}
+			]
+		},
+		"parens-block": {
+			"name": "meta.parens.block.geckscript",
+			"begin": "\\(",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.section.parens.begin.bracket.round.geckscript"
+				}
+			},
+			"end": "\\)",
+			"endCaptures": {
+				"0":{
+					"name": "punctuation.section.parens.end.bracket.round.geckscript"
+				}
+			}
+		},
+		"comments":{
+			"name": "comment.line.character.geckscript",
+			"match": ";.*" 
+		},
+		"function":{
+			"match": "(?i)^[\\s]*(\\w+)(\\s(\\w+))*",
+			"captures": {
+				"0": {
+					"name": "meta.definition.function.geckscript entity.name.function.geckscript"
+				},
+				"1": {
+					"name":"variable.parameter.geckscript"
+				}
+			},
+			"patterns": [
+				{
+					"include": "$self"
+				}
+			]
+		},
+		"function-parameters": {
+			"name": "meta.parameters.geckscript",
+			"begin": "\\{",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.parameters.begin.geckscript"
+				}
+			},
+			"end": "\\}",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.parameters.end.geckscript"
+				}
+			},
+			"patterns": [
+				{
+					"name": "variable.name.geckscript",
+					"match": "\\b\\w+\\b"
+				},
+				{
+					"name": "punctuation.separator.parameter.geckscript",
+					"match": ","
+				}
+			]
+		}
+	}
+}
